@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"  
+    updateCheck="false"> 
+	<!--如果缓存中的对象存储超过指定的缓存数量的对象存储的磁盘地址-->
+	<diskStore path="java.io.tmpdir/zywx3-ehcache"/>
+
+	<!-- 默认cache：如果没有对应的特定区域的缓存，就使用默认缓存 -->
+	<!--  
+        name:cache唯一标识   
+        eternal：缓存是否永久有效   
+        maxElementsInMemory：内存中最大缓存对象数  
+        overflowToDisk(true,false)：缓存对象达到最大数后，将缓存写到硬盘中  
+        diskPersistent：硬盘持久化  
+        timeToIdleSeconds：缓存清除时间   
+        timeToLiveSeconds：缓存存活时间  
+        memoryStoreEvictionPolicy：缓存清空策略  
+        1.FIFO：first in first out 先讲先出  
+        2.LFU： Less Frequently Used 一直以来最少被使用的  
+        3.LRU：Least Recently Used  最近最少使用的  
+    -->  
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="false" />
+	<!-- 指定区域cache：通过name指定，name对应到Hibernate中的区域名即可-->
+	<cache name=".com.sinosoft.trtsdms.entity" eternal="false"
+		maxElementsInMemory="100" timeToIdleSeconds="1200" timeToLiveSeconds="1200"
+		overflowToDisk="false">
+	</cache>
+	
+	<cache name="shiro-activeSessionCache"  
+       overflowToDisk="false"  
+       eternal="false"  
+       diskPersistent="false"  
+       timeToLiveSeconds="0"  
+       timeToIdleSeconds="0"  
+       statistics="true"/>   
+
+</ehcache>  
